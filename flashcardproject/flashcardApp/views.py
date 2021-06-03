@@ -4,8 +4,10 @@ from .serializers import CardSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 # Create your views here.
 class CardList(APIView):
 
@@ -20,3 +22,16 @@ class CardList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class CardDetail(APIView):
+
+    def get_object(self, pk):
+        try:
+            return Card.objects.get(pk=pk)
+        except Card.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        card = self.get_object(pk)
+        serializer = CardSerializer(card)
+        return Response(serializer.data)
