@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions, renderers, generics
+from rest_framework import viewsets, permissions, renderers, generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
@@ -49,7 +49,7 @@ class CardList(APIView):
 
 
 class CollectionList(APIView):
-    def get(self, reqeust, pk):
+    def get(self, reqeust):
         collections = Collection.objects.all()
         serializer = CollectionSerializer(collections, many=True)
         return Response(serializer.data)
