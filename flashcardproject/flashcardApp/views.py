@@ -49,7 +49,7 @@ class CardList(APIView):
 
 
 class CollectionList(APIView):
-    def get(self, reqeust):
+    def get(self, reqeust, pk):
         collections = Collection.objects.all()
         serializer = CollectionSerializer(collections, many=True)
         return Response(serializer.data)

@@ -29,5 +29,5 @@ urlpatterns = format_suffix_patterns([
     path('cards/<int:pk>/', views.CardDetail.as_view()),
     path('collections/<int:pk>/cards/', views.CollectionDetail.as_view()),
     path('collections/', views.CollectionList.as_view()),
-    path('collections/<int:pk>/', views.CollectionList.as_view()),
+    path('collections/<int:pk>/', views.CollectionDetail.as_view()),
 ])
